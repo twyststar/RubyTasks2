@@ -1,12 +1,12 @@
 <h1><%=@list.name%></h1>
 
 <% if @tasks.any?() %>
-  <h3>Here are your lists:</h3>
+  <h3>Here are your tasks:</h3>
 
   <ul>
     <% @tasks.each() do |task| %>
     <% if task.list_id == @list.id %>
-      <li><%= task.description() %></a> </li>
+      <li><%= task.description %><br> <a href="/tasks/<%= task.id() %>/edit">Update/Delete</a></li>
       <% end %>
     <% end %>
   </ul>
@@ -16,6 +16,13 @@
     <p>There are no tasks yet!</p>
 
 <% end %>
+
+<form action="/tasks_add" method="post">
+<input id='list_id' name='list_id' type='hidden' value='<%= @list.id()%>'>
+  <label for="description">Add a task:</label>
+  <input id="description" name="description" type="text">
+  <button type="submit">Add task</button>
+</form>
 
 
 
